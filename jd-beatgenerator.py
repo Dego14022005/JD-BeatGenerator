@@ -13,11 +13,14 @@ def detectar_batidas(audio_path):
     # Converter os frames de batida para milissegundos inteiros
     beat_times = (librosa.frames_to_time(beat_frames, sr=sr) * 1000).astype(int)
 
-    return beat_times.tolist()
+    beat_times = beat_times.tolist()
+    beat_times.insert(0, 0)
+
+    return beat_times
 
 def salvar_anotacoes_batidas(batidas, output_path):
     data = {
-        'batidas': batidas
+        'beats': batidas
     }
 
     with open(output_path, 'w') as file:
